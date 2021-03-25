@@ -84,6 +84,7 @@ public class StudentController {
                 .map(student -> {
                     student.setFirstName(newStudent.getFirstName());
                     student.setLastName(newStudent.getLastName());
+                    student.setEmail(newStudent.getEmail());
                     student.setSupervisor(newStudent.getSupervisor());
                     System.out.println("intern updated" + newStudent.toString());
                     return studentService.save(student);

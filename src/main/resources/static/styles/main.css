@@ -1,0 +1,32 @@
+body {
+    background-color: burlywood;
+}
+
+#body{
+    margin-left: 75px;
+    margin-right: 75px;
+}
+
+.btn-danger {
+    background-color: #f44336;
+    border: black;
+}
+
+.btn-primary {
+    background-color: #008CBA;
+    border: black;
+}
+
+#btnAddStudent {
+    background-color: #4CAF50;
+    border: black;
+}
+
+h2 {
+    margin-top: 25px;
+    margin-bottom: 5px;
+}
+
+#cdata {
+    margin-left: 1px;
+}

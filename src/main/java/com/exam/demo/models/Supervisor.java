@@ -17,8 +17,8 @@ public class Supervisor {
     @Column(name = "lastName")
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "supervisor")
-    private Set<Student> students;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "supervisor")
+    //private Set<Student> students;
 
     public Supervisor() {
     }
@@ -27,7 +27,7 @@ public class Supervisor {
         this.supervisorId = supervisorId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.students = students;
+        //this.students = students;
     }
 
     public Long getSupervisorId() {
@@ -53,7 +53,7 @@ public class Supervisor {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
+/*
     public Set<Student> getStudents() {
         return students;
     }
@@ -70,5 +70,5 @@ public class Supervisor {
                 ", lastName='" + lastName + '\'' +
                 ", students=" + students +
                 '}';
-    }
+    }*/
 }
