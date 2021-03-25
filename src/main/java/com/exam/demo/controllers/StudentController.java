@@ -27,12 +27,13 @@ public class StudentController {
         this.supervisorService = supervisorService;
     }
 
-
+    // get all students
     @GetMapping("/students")
     public List<Student> getAllStudents() {
         return studentService.findAll();
     }
 
+    // get all supervisors
     @GetMapping("/supervisors")
     public List<Supervisor> getAllSupervisors() {
         return supervisorService.findAll();
@@ -45,39 +46,48 @@ public class StudentController {
         return student;
     }
 
+    // Get supervisor by id
+    @GetMapping("/supervisors/{supervisorId}")
+    public Optional<Supervisor> getSupervisorById(@PathVariable Long supervisorId) {
+        Optional<Supervisor> supervisor = supervisorService.findById(supervisorId);
+        return supervisor;
+    }
+
     // Create student
     @PostMapping("/newStudent")
     public Student addNewStudent(@RequestBody Student student) {
         return studentService.save(student);
     }
 
+    // Create supervisor
+    @PostMapping("/newSupervisor")
+    public Supervisor addSupervisor(@RequestBody Supervisor supervisor) {
+        return supervisorService.save(supervisor);
+    }
+
     // Delete student
-    @DeleteMapping("students/studentId")
-    void deleteIntern(@PathVariable Long studentId) {
+    @DeleteMapping("/deleteStudent/{studentId}")
+    void deleteStudent(@PathVariable Long studentId) {
         studentService.deleteById(studentId);
     }
-    /*
-    // Get intern by ID
-    @GetMapping("/interns/{internId}")
-    public Optional<Intern> getInternById(@PathVariable Long internId){
-        Optional<Intern> intern = internService.findById(internId);
-        return intern;
+
+    // Delete supervisor
+    @DeleteMapping("/deleteSupervisor/{supervisorId}")
+    void deleteSupervisor(@PathVariable Long supervisorId) {
+        supervisorService.deleteById(supervisorId);
     }
 
-    // Create new Intern
-    @PostMapping("/newIntern")
-    public Intern addNewIntern(@RequestBody Intern intern){
-        return internService.save(intern);
+    @PutMapping("/update/{studentId}")
+    public Student updateStudent(@RequestBody Student newStudent, @PathVariable Long studentId) {
+        System.out.println("student to be updated" + newStudent.toString());
+        return studentService.findById(studentId)
+                .map(student -> {
+                    student.setFirstName(newStudent.getFirstName());
+                    student.setLastName(newStudent.getLastName());
+                    student.setSupervisor(newStudent.getSupervisor());
+                    System.out.println("intern updated" + newStudent.toString());
+                    return studentService.save(student);
+                })
+                .orElseGet(() -> studentService.save(newStudent));
     }
-
-    // Delete Intern
-    @DeleteMapping("/interns/{internId}")
-    void deleteIntern(@PathVariable Long internId){
-        internService.deleteById(internId);
-    }
-
-
-
-     */
-
 }
