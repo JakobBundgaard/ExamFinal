@@ -9,23 +9,17 @@ function getAllStudents() {
             $('#tdata')
                 .append($("<tr>"))
                 .append($("<input type=\"text\" class=\"form-control\">").val(students.studentId))
-
                 .append($("<td>"))
                 .append($("<input type=\"text\" class=\"form-control\">").val(students.firstName))
-
                 .append($("<td>"))
                 .append($("<input type=\"text\" class=\"form-control\">").val(students.lastName))
-
                 .append($("<td>"))
                 .append($("<input type=\"text\" class=\"form-control\">").val(students.email))
                 .append($("<td>"))
-
                 .append($("<input type=\"text\" class=\"form-control\">").val(students.supervisor.supervisorId))
                 .append($("<td>"))
-
                 .append($("<td>"))
                 .append($("<button type='button' class='btn btn-primary' onclick=\"updateStudent(" + students.studentId + ")\">Update</button>"))
-
                 .append($("<td>"))
                 .append($("<button type='button' class='btn btn-danger' onclick=\"deleteStudent(" + students.studentId + ")\">Delete</button>"))
                 .append($("</td>"));
@@ -40,7 +34,6 @@ function supervisorDropdown() {
         url: 'http://localhost:8080/api/supervisors'
     }).done(function (data) {
         $('#cdata').empty();
-
         $.each(data, function (i, supervisor) {
             $('#cdata')
                 .append($("<option></option>")
@@ -51,7 +44,6 @@ function supervisorDropdown() {
 
 // Create a new student
 function createStudent() {
-
     let student = {};
     let supervisor = {};
     let dynamicURL = "";
@@ -62,11 +54,8 @@ function createStudent() {
         student.lastName = $('#lastname').val();
         student.email = $('#email').val();
         let temp = $("#cdata option:selected").text();
-        let supervisorIdTemp = temp.substr(0, 1);
-        supervisor.supervisorId = supervisorIdTemp;
+        supervisor.supervisorId = temp.substr(0, 1);
         student.supervisor = supervisor;
-        console.log(temp);
-        console.log(supervisor.supervisorId);
         dynamicURL = "http://localhost:8080/api/newStudent/";
         methodName = "POST";
         let studentObj = JSON.stringify(student);
@@ -98,7 +87,6 @@ function updateStudent(id) {
             student.supervisor = supervisor;
             student.supervisor.supervisorId = $(`.form-control:eq(${index +4})`).val();
             console.log(JSON.stringify(student));
-            console.log("After");
         }
     });
     $.ajax({
@@ -114,7 +102,6 @@ function updateStudent(id) {
         error: function(error) {
             alert(error)
         }
-
     })
 }
 
